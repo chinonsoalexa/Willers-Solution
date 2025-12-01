@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Willers Solutions - Youth Empowerment Program</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Define custom colors based on the logo/brand */
+        :root {
+            --color-brand-primary: #1E293B; /* Deep Blue (Slate 800) */
+            --color-brand-secondary: #F97316; /* Vibrant Orange */
+            --color-brand-accent: #6366F1; /* Indigo (for accents/buttons) */
+            --color-bg-light: #F8FAFC; /* Light Blue Gray (Slate 50) */
+            --color-bg-dark: #0F172A; /* Dark Blue Gray (Slate 900) */
+        }
+
+        /* Applying custom colors to Tailwind classes */
+        /* This ensures we use the custom variables defined above */
+        .text-brand-primary { color: var(--color-brand-primary); }
+        .text-brand-secondary { color: var(--color-brand-secondary); }
+        .text-brand-accent { color: var(--color-brand-accent); }
+        .bg-brand-primary { background-color: var(--color-brand-primary); }
+        .bg-brand-secondary { background-color: var(--color-brand-secondary); }
+        .bg-brand-accent { background-color: var(--color-brand-accent); }
+        .bg-bg-light { background-color: var(--color-bg-light); }
+        .bg-bg-dark { background-color: var(--color-bg-dark); }
+
+        /* Custom Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom Keyframe for subtle pulse effect on CTAs */
+        @keyframes pulse-custom {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            }
+            50% {
+                transform: scale(1.01);
+                box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            }
+        }
+        .animate-pulse-custom {
+            animation: pulse-custom 3s ease-in-out infinite;
+        }
+
+        /* Custom styles for skill hub cards on hover and clickability */
+        .skill-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px -5px rgba(30, 41, 59, 0.15); /* Primary color shadow lift */
+            border-color: var(--color-brand-secondary); /* Orange highlight on hover */
+        }
+        
+        /* Ensure the logo placeholder is properly sized */
+        .logo-placeholder {
+            /* --- CHANGE 1: Using your uploaded logo.png --- */
+            background-image: url('logo.png'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 180px;
+            height: 40px;
+        }
+
+        /* Modal backdrop styling */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+
+        /* Chatbot window styling */
+        #chat-window {
+            z-index: 100;
+            right: 20px;
+            bottom: 100px;
+            width: 90vw;
+            max-width: 350px;
+            height: 450px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transform: scale(0.9);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        #chat-window.open {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .chat-message {
+            max-width: 85%;
+            padding: 8px 12px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        /* Typing indicator dots animation */
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin: 0 2px;
+            border-radius: 50%;
+            background: white;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1.0);
+            }
+        }
+    </style>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="font-sans text-gray-800 bg-white">
+
+    <header class="sticky top-0 z-50 bg-white shadow-xl">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#hero" class="flex items-center">
+                <img src="logo.png" alt="Logo" class="h-12 w-auto"> <!-- UPDATED LOGO -->
+            </a>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#challenge" class="text-brand-primary hover:text-brand-secondary transition duration-300">The Challenge</a>
+                <a href="#hubs" class="text-brand-primary hover:text-brand-secondary transition duration-300">Skill Hubs</a>
+                <a href="#lending" class="text-brand-primary hover:text-brand-secondary transition duration-300">Financing</a>
+                <a href="#registration" class="text-brand-primary hover:text-brand-secondary transition duration-300">Enrollment</a>
+                <a href="#" onclick="event.preventDefault(); toggleChat();" class="text-brand-primary hover:text-brand-secondary transition duration-300">FAQ</a>
+            </nav>
+            <a href="#registration" class="px-5 py-2 bg-brand-secondary text-white font-semibold rounded-full shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-[1.05] animate-pulse-custom">
+                Enroll Now
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Transaction Tracking Section -->
+        <section id="transaction-tracking" class="py-24 md:py-36 bg-gray-50">
+            <div class="container mx-auto px-4 max-w-2xl text-center">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-brand-primary mb-6">Track Your Transaction</h2>
+                <p class="text-gray-600 text-lg mb-8">Enter your email below to check the status of your transaction.</p>
+
+                <div class="bg-white p-6 rounded-xl shadow-xl border-l-4 border-brand-secondary mb-10">
+                    <form action="#" method="GET" class="space-y-4">
+                        <input type="email" name="email" placeholder="Enter your email" required class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary" />
+                        <button type="submit" class="w-full py-3 bg-brand-primary text-white font-bold rounded-xl shadow-lg hover:bg-slate-700 transition transform hover:scale-[1.03]">Track Now</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-bg-dark text-white py-12">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <a href="#" class="text-2xl font-bold text-brand-secondary flex items-center mb-4">
+                    <span data-lucide="briefcase" class="w-6 h-6 mr-2 text-brand-secondary"></span>
+                    Willers Solutions
+                </a>
+                <p class="text-sm text-gray-400">Transforming Nigeria's youth into job-ready professionals through structured education and career placement.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4 text-white">Program Details</h3>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#hubs" class="hover:text-brand-secondary transition duration-300">Skill Hubs</a></li>
+                    <li><a href="#lending" class="hover:text-brand-secondary transition duration-300">Financing & Tools</a></li>
+                    <li><a href="#placement" class="hover:text-brand-secondary transition duration-300">Job Placement Model</a></li>
+                    <li><a href="track-payment.html" class="hover:text-brand-secondary transition duration-300">Track Payment</a></li>
+                    <li><a href="payment.html" class="hover:text-brand-secondary transition duration-300">Enrollment</a></li>
+                    <li><a href="#" onclick="event.preventDefault(); toggleChat();" class="hover:text-brand-secondary transition duration-300">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4 text-white">Get In Touch</h3>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li class="flex items-center"><span data-lucide="mail" class="w-4 h-4 mr-2 text-brand-secondary"></span> info@willerssolutions.com</li>
+                    <li class="flex items-center"><span data-lucide="globe" class="w-4 h-4 mr-2 text-brand-secondary"></span> www.willerssolutions.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-8 pt-8 border-t border-gray-700 text-center">
+            <p class="text-sm text-gray-400">&copy; 2025 Willers Solutions. All Rights Reserved. | <a href="#" class="hover:text-brand-secondary">Terms & Conditions</a></p>
+        </div>
+    </footer>
+
+    <div id="skill-modal" class="fixed inset-0 hidden modal-backdrop items-center justify-center p-4" onclick="closeSkillDetails(event)">
+        <div class="bg-white rounded-xl shadow-3xl max-w-lg w-full p-8 relative transform transition-all duration-300 scale-100" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-900" onclick="closeSkillDetails()">
+                <span data-lucide="x" class="w-6 h-6"></span>
+            </button>
+            <h3 id="modal-skill-title" class="text-3xl font-bold text-brand-primary mb-4 border-b pb-2"></h3>
+            <p id="modal-skill-description" class="text-gray-700 mb-6"></p>
+
+            <div class="mt-8 pt-4 border-t border-gray-100">
+                <h4 class="text-xl font-bold text-brand-primary mb-4 flex items-center">
+                    ✨ Career Path Tool
+                </h4>
+                <button id="generate-roadmap-btn" onclick="generateCareerRoadmap(this.dataset.skill)" data-skill="" class="w-full py-3 mb-4 bg-brand-secondary text-white font-bold rounded-lg hover:bg-orange-600 transition duration-300 disabled:opacity-50 flex items-center justify-center">
+                    <span data-lucide="route" class="w-5 h-5 mr-2"></span> Generate 3-Step Career Roadmap
+                </button>
+                <div id="roadmap-loading" class="hidden text-brand-accent flex items-center justify-center mb-4">
+                    <span data-lucide="loader" class="w-5 h-5 mr-2 animate-spin-slow"></span> Charting your professional course...
+                </div>
+                <div id="roadmap-output" class="p-4 bg-bg-light rounded-lg border border-brand-accent/50 text-gray-700 whitespace-pre-wrap hidden"></div>
+            </div>
+
+            <button class="w-full py-3 mt-6 bg-brand-primary text-white font-bold rounded-lg hover:bg-slate-700 transition duration-300" onclick="closeSkillDetails()">
+                Got It! Proceed to Enrollment
+            </button>
+        </div>
+    </div>
+    
+    <div id="chat-window" class="fixed rounded-xl bg-white flex flex-col overflow-hidden border border-gray-300">
+        <div id="chat-header" class="p-4 bg-brand-primary text-white flex justify-between items-center shadow-md flex-shrink-0">
+            <span class="font-bold text-lg">Ask Any Question</span>
+            <button onclick="toggleChat()" class="text-white hover:text-brand-secondary">
+                <span data-lucide="minus" class="w-5 h-5"></span>
+            </button>
+        </div>
+
+        <div id="chat-messages" class="flex-grow p-3 overflow-y-auto bg-gray-50 space-y-2">
+            <div class="flex justify-start">
+                <div class="chat-message bg-brand-secondary text-white self-start">
+                    Welcome! I'm your Program Assistant. I have answers to 50 key questions about **cost**, **structure**, and **job placement** based on the official program guide. Ask away!
+                </div>
+            </div>
+            <div id="typing-indicator" class="flex justify-start hidden">
+                <div class="chat-message bg-white text-gray-800 self-start border border-gray-200 flex items-center">
+                    <span class="mr-2 text-sm text-gray-500">Assistant is typing</span>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <form id="chat-form" class="p-3 bg-white border-t border-gray-200 flex flex-shrink-0" onsubmit="sendMessage(event)">
+            <input type="text" id="chat-input" placeholder="Ask a question..." class="flex-grow p-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-brand-accent" required>
+            <button type="submit" id="send-btn" class="px-3 py-2 bg-brand-accent text-white rounded-r-lg hover:bg-indigo-600 transition duration-200 disabled:opacity-50">
+                <span data-lucide="send" class="w-5 h-5"></span>
+            </button>
+        </form>
+    </div>
+
+    <button id="chat-toggle-btn" onclick="toggleChat()" class="fixed bottom-4 right-4 w-16 h-16 bg-brand-secondary rounded-full flex items-center justify-center text-white shadow-xl hover:bg-orange-600 transition duration-300 transform hover:scale-110">
+        <span data-lucide="message-square" class="w-8 h-8"></span>
+    </button>
+
+    <script src="assets/js/chat.js"></script>
+</body>
+</html>
