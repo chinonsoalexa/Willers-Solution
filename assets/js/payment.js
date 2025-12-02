@@ -36,19 +36,18 @@ async function loadTransactionSummary() {
             data.transaction_id || bookingID;
 
         // Date
-        const formattedDate = data.date
-            ? new Date(data.date).toLocaleDateString("en-NG", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric"
-            })
-            : "N/A";
 
-        document.getElementById("summary-date").textContent = formattedDate;
+        document.getElementById("summary-date").textContent = formatDate(data.success.CreatedAt);
 
     } catch (error) {
         console.error("Error loading course:", error);
     }
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const options = { day: "numeric", month: "short", year: "numeric" };
+  return date.toLocaleDateString("en-GB", options);
 }
 
 function renderStatusBadge(status) {
