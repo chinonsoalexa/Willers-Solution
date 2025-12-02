@@ -29,6 +29,7 @@ async function loadTransactionSummary() {
         document.getElementById("summary-email").textContent = data.email || "N/A";
         document.getElementById("summary-phone").textContent = data.phone || "N/A";
         document.getElementById("summary-skill").textContent = data.course || "N/A";
+        renderStatusBadge(data.payment_status);
 
         // Amount
         document.getElementById("summary-amount").textContent =
@@ -56,3 +57,31 @@ async function loadTransactionSummary() {
 
 // Auto-run when page loads
 document.addEventListener("DOMContentLoaded", loadTransactionSummary);
+
+function renderStatusBadge(status) {
+    const statusEl = document.getElementById("summary-status");
+
+    if (!statusEl) return;
+
+    const cleanStatus = status?.toLowerCase() || "";
+
+    // Reset classes first
+    statusEl.className = "font-bold px-3 py-1 rounded-lg text-white";
+
+    if (cleanStatus === "successful" || cleanStatus === "success") {
+        statusEl.textContent = "Successful";
+        statusEl.classList.add("bg-green-500");
+    } 
+    else if (cleanStatus === "pending") {
+        statusEl.textContent = "Pending";
+        statusEl.classList.add("bg-yellow-500");
+    } 
+    else if (cleanStatus === "failed" || cleanStatus === "fail") {
+        statusEl.textContent = "Failed";
+        statusEl.classList.add("bg-red-500");
+    } 
+    else {
+        statusEl.textContent = "Unknown";
+        statusEl.classList.add("bg-gray-500");
+    }
+}
