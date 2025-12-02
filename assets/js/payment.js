@@ -1,9 +1,10 @@
 async function loadTransactionSummary() {
     // Get bookingID from the URL
     const bookingID = new URLSearchParams(window.location.search).get("OrderID");
+    var orderIdLoc;
 
     if (!bookingID) {
-        const orderIdLoc = localStorage.getItem("OrderID");
+        orderIdLoc = localStorage.getItem("OrderID");
 
         const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?OrderID=' + orderIdLoc;
         history.pushState({ path: newUrl }, '', newUrl);
