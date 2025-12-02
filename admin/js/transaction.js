@@ -135,7 +135,7 @@ async function loadTransactions(pageNumber) {
     const params = new URLSearchParams(currentUrl.search);
     if (!pageNumber) pageNumber = params.get("page") || "1";
 
-    const apiUrl = "https://api.payuee.com/transactions-save-refuge/" + pageNumber;
+    const apiUrl = "https://willers-solutions-backend.onrender.com/transactions-save-refuge/" + pageNumber;
 
     const requestOptions = {
         method: "GET",
