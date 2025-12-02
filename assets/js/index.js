@@ -1,5 +1,5 @@
 document.querySelector('#register-btn').addEventListener('click', async function (e) {
-  e.preventDefault();
+    e.preventDefault();
 
     const formData = {
         surn_name: document.getElementById("surname").value.trim(),
@@ -7,46 +7,43 @@ document.querySelector('#register-btn').addEventListener('click', async function
         email: document.getElementById("email").value.trim(),
         phone: document.getElementById("phone").value.trim(),
         course: document.getElementById("skillHub").value,
-        
-        // Default values (you will override these after payment):
         amount_paid: 15000,
     };
 
-  document.getElementById("register-btn").textContent = "Processing...";
+    const button = document.getElementById('register-btn');
+    button.textContent = "Processing...";
+    button.disabled = true;
+    button.classList.add('opacity-50', 'cursor-not-allowed');
 
-  const button = document.getElementById('register-btn');
+    try {
+        const response = await fetch("https://willers-solutions-backend.onrender.com/buy-course", {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
 
-  // Disable by adding a class and preventing interaction
-  button.classList.add('disabled');          // You can style this in CSS
-  button.disabled = true;                   // Disable the button
+        if (!response.ok) {
+            throw new Error("Request failed with " + response.status);
+        }
 
-  try {
-    const response = await fetch("https://willers-solutions-backend.onrender.com/buy-course", {
-      method: 'POST',
-      credentials: 'include', // This ensures cookies (sessions/JWT) are sent
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
+        const data = await response.json();
+        console.log("Payment initiation response:", data);
 
-    if (!response.ok) {
+        // Save the course ID
+        localStorage.setItem("OrderID", String(data.course_id));
+
+        // Redirect to Paystack
+        window.location.href = data.success.data.authorization_url;
+
+    } catch (error) {
+        console.error(error);
+
+        // Restore button so user can try again
         button.textContent = "Pay ₦15,000 One-Time Fee";
-        button.classList.remove('disabled');          // You can style this in CSS
-        button.disabled = false;                   // Disable the button
-      throw new Error(`Request failed with status ${response.status}`);
+        button.disabled = false;
+        button.classList.remove('opacity-50', 'cursor-not-allowed');
     }
-
-    const data = await response.json();
-    console.log("Payment initiation response:", data);
-    document.getElementById("submitBooking").textContent = "Please wait...";
-    localStorage.setItem("OrderID", String(data.course_id));
-    window.location.href = data.success.data.authorization_url;
-
-  } catch (error) {
-        button.textContent = "Pay ₦15,000 One-Time Fee";
-        button.classList.remove('disabled');          // You can style this in CSS
-        button.disabled = false;                   // Disable the button
-    return null;
-  }
 });
