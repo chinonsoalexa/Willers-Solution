@@ -32,7 +32,7 @@ async function loadTransactionSummary() {
 
         // Transaction ID
         document.getElementById("summary-tx").textContent =
-            "WIL-"+data.success.transaction_id || bookingID;
+            "WIL-"+data.success.ID || bookingID;
 
         // Date
 
