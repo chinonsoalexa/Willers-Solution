@@ -24,6 +24,7 @@ async function loadTransactionSummary() {
         document.getElementById("summary-email").textContent = data.success.email || "N/A";
         document.getElementById("summary-phone").textContent = data.success.phone || "N/A";
         document.getElementById("summary-skill").textContent = data.success.course || "N/A";
+        document.getElementById("amount-paid").textContent = data.success.amount_paid || "N/A";
         renderStatusBadge(data.success.payment_status);
 
         // Amount
