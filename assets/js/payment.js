@@ -17,14 +17,14 @@ async function loadTransactionSummary() {
         const data = await response.json();
 
         // Combine full name
-        const fullName = `${data.other_name || ""} ${data.surn_name || ""}`.trim();
+        const fullName = `${data.success.other_name || ""} ${data.success.surn_name || ""}`.trim();
 
         // Render values
         document.getElementById("summary-name").textContent = fullName || "N/A";
-        document.getElementById("summary-email").textContent = data.email || "N/A";
-        document.getElementById("summary-phone").textContent = data.phone || "N/A";
-        document.getElementById("summary-skill").textContent = data.course || "N/A";
-        renderStatusBadge(data.payment_status);
+        document.getElementById("summary-email").textContent = data.success.email || "N/A";
+        document.getElementById("summary-phone").textContent = data.success.phone || "N/A";
+        document.getElementById("summary-skill").textContent = data.success.course || "N/A";
+        renderStatusBadge(data.success.payment_status);
 
         // Amount
         document.getElementById("summary-amount").textContent =
