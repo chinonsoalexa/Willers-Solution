@@ -199,7 +199,7 @@ function renderTransactions(data) {
                 <td>${new Date(txn.CreatedAt).toLocaleDateString()}</td>
                 <td>₦${txn.amount_paid.toLocaleString()}</td>
                 <td>${txn.payment_method}</td>
-                <td>NYSC Payment</td>
+                <td>${txn.course}</td>
                 <td><span class="badge bg-${statusInfo.color}-subtle text-${statusInfo.color} py-1 px-2 fs-12">${statusInfo.text}</span></td>
                 <td>
                     <div class="d-flex gap-2">
