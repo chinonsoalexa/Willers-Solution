@@ -238,19 +238,23 @@ function renderPagination(pagination) {
     const paginationContainer = document.querySelector(".pagination");
     if (!paginationContainer) return;
 
-    const { NextPage, PreviousPage, CurrentPage, TotalPages } = pagination;
+    const CurrentPage = pagination.page;
+    const TotalPages = pagination.totalPages;
+
+    const PreviousPage = CurrentPage > 1 ? CurrentPage - 1 : 0;
+    const NextPage = CurrentPage < TotalPages ? CurrentPage + 1 : 0;
 
     let paginationHTML = "";
 
-    // Previous Button
+    // Previous
     paginationHTML += `
-        <li class="page-item ${PreviousPage <= 0 ? "disabled" : ""}">
+        <li class="page-item ${PreviousPage === 0 ? "disabled" : ""}">
             <a class="page-link" href="javascript:void(0);" onclick="goToPage(${PreviousPage})">Previous</a>
         </li>
     `;
 
-    // Page Numbers (3 before, current, 3 after)
-    for (let i = Math.max(1, CurrentPage - 2); i <= Math.min(TotalPages, CurrentPage + 2); i++) {
+    // Page numbers
+    for (let i = 1; i <= TotalPages; i++) {
         paginationHTML += `
             <li class="page-item ${i === CurrentPage ? "active" : ""}">
                 <a class="page-link" href="javascript:void(0);" onclick="goToPage(${i})">${i}</a>
@@ -258,9 +262,9 @@ function renderPagination(pagination) {
         `;
     }
 
-    // Next Button
+    // Next
     paginationHTML += `
-        <li class="page-item ${NextPage > TotalPages ? "disabled" : ""}">
+        <li class="page-item ${NextPage === 0 ? "disabled" : ""}">
             <a class="page-link" href="javascript:void(0);" onclick="goToPage(${NextPage})">Next</a>
         </li>
     `;
