@@ -155,7 +155,7 @@ async function loadTransactions(pageNumber) {
         }
 
         renderTransactions(responseData.data);
-        // renderPagination(responseData.pagination);
+        renderPagination(responseData.pagination);
     } catch (error) {
         console.error("Error loading transactions:", error);
     }
