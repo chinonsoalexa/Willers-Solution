@@ -198,7 +198,11 @@ function renderTransactions(data) {
                 <td>${txn.other_name + " " + txn.surn_name}</td>
                 <td>${new Date(txn.CreatedAt).toLocaleDateString()}</td>
                 <td>₦${txn.amount_paid.toLocaleString()}</td>
-                <td>${txn.payment_method}</td>
+                <td>
+                    <a href="https://wa.me/${txn.phone}" target="_blank" class="text-green-600 hover:underline">
+                        ${txn.phone}
+                    </a>
+                </td>
                 <td>${txn.course}</td>
                 <td><span class="badge bg-${statusInfo.color}-subtle text-${statusInfo.color} py-1 px-2 fs-12">${statusInfo.text}</span></td>
                 <td>
