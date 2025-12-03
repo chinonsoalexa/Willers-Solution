@@ -208,7 +208,7 @@ async function callGeminiAPI(userQuery, systemPrompt, retryCount = 0) {
         return result.success || "Error: No generated content found.";
 
     } catch (error) {
-        console.error("Gemini API Error:", error);
+        // console.error("Gemini API Error:", error);
         return `Error: Failed to generate content. Please try again. (${error.message})`;
     }
 }
