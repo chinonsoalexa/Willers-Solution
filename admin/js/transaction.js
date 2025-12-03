@@ -177,14 +177,14 @@ function renderTransactions(data) {
             pending: { text: "Pending", color: "warning" }
         };
 
-        const statusInfo = statusMap[txn.transaction_status] || { text: txn.transaction_status, color: "secondary" };
-        if (txn.service_type = "fundWallet") {
-            txn.service_type = "Save Donation"
-        }
+        const statusInfo = statusMap[txn.payment_status] || { text: txn.payment_status, color: "secondary" };
+        // if (txn.service_type = "fundWallet") {
+        //     txn.service_type = "Save Donation"
+        // }
 
-        if (txn.channel_type = "bank_transfer") {
-            txn.channel_type = "Bank Transfer"
-        }
+        // if (txn.channel_type = "bank_transfer") {
+        //     txn.channel_type = "Bank Transfer"
+        // }
 
         const row = `
             <tr>
@@ -195,11 +195,11 @@ function renderTransactions(data) {
                     </div>
                 </td>
                 <td><a href="#!" class="link-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#TransactionsViewModal">TXN-${txn.ID}</a></td>
-                <td>${txn.user_name}</td>
+                <td>${txn.other_name + " " + txn.surn_name}</td>
                 <td>${new Date(txn.created_at).toLocaleDateString()}</td>
-                <td>₦${txn.amount.toLocaleString()}</td>
-                <td>${txn.channel_type}</td>
-                <td>${txn.service_type}</td>
+                <td>₦${txn.amount_paid.toLocaleString()}</td>
+                <td>${txn.payment_method}</td>
+                <td>NYSC Payment</td>
                 <td><span class="badge bg-${statusInfo.color}-subtle text-${statusInfo.color} py-1 px-2 fs-12">${statusInfo.text}</span></td>
                 <td>
                     <div class="d-flex gap-2">
