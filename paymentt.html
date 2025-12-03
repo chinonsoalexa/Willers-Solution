@@ -140,7 +140,7 @@
 
 <body class="font-sans text-gray-800 bg-white">
 
-        <header class="sticky top-0 z-50 bg-white shadow-xl">
+    <header class="sticky top-0 z-50 bg-white shadow-xl">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href="index.html#hero" class="flex items-center">
                 <img src="logo.png" alt="Logo" class="h-12 w-auto"> <!-- UPDATED LOGO -->
@@ -159,17 +159,58 @@
     </header>
 
     <main>
-        <!-- Transaction Tracking Section -->
-        <section id="transaction-tracking" class="py-24 md:py-36 bg-gray-50">
+        <!-- Payment Successful Section -->
+        <section id="payment-success" class="py-24 md:py-36 bg-white">
             <div class="container mx-auto px-4 max-w-2xl text-center">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-brand-primary mb-6">Track Your Transaction</h2>
-                <p class="text-gray-600 text-lg mb-8">Enter your Paystack Reference below to check the status of your transaction.</p>
 
-                <div class="bg-white p-6 rounded-xl shadow-xl border-l-4 border-brand-secondary mb-10">
-                    <form id="trackForm" action="#" method="GET" class="space-y-4">
-                        <input type="text" name="text" placeholder="Paystack reference e.g lu0bwtb866" required class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary" />
-                        <button type="submit" class="w-full py-3 bg-brand-primary text-white font-bold rounded-xl shadow-lg hover:bg-slate-700 transition transform hover:scale-[1.03]">Track Now</button>
-                    </form>
+                <!-- Success Icon -->
+                <div class="w-28 h-28 mx-auto mb-6 flex items-center justify-center rounded-full bg-green-100 shadow-xl">
+                    <span data-lucide="check-circle" class="w-16 h-16 text-green-500"></span>
+                </div>
+
+                <!-- Title -->
+                <h2 class="text-4xl md:text-5xl font-extrabold text-brand-primary mb-4">
+                    Payment Successful!
+                </h2>
+                <p class="text-gray-600 text-lg mb-8">
+                    Thank you for securing your spot in the <span class="font-semibold text-brand-secondary">Willers Solutions 3-Month Career Program</span>.  
+                    Your registration is now complete.
+                </p>
+
+                <!-- Transaction Details -->
+                <div class="bg-gray-50 text-left p-6 rounded-xl shadow-xl border-l-4 border-brand-secondary mb-10">
+                    <h3 class="font-bold text-lg mb-4 text-brand-primary">Transaction Summary</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><strong>Name:</strong> <span id="summary-name">Loading...</span></li>
+                        <li><strong>Email:</strong> <span id="summary-email">Loading...</span></li>
+                        <li><strong>Phone:</strong> <span id="summary-phone">Loading...</span></li>
+                        <li><strong>Skill Hub:</strong> <span id="summary-skill">Loading...</span></li>
+                        <li><strong>Transaction ID:</strong> <span id="summary-tx">Loading...</span></li>
+                        <li><strong>Date:</strong> <span id="summary-date">Loading...</span></li>
+                        <li><strong>Amount Paid:</strong> <span id="summary-amount" class="text-brand-secondary font-bold"></span></li>
+                        <li>
+                            <strong>Status:</strong>
+                            <span id="summary-status" class="font-bold px-3 py-1 rounded-lg text-white">
+                                Loading...
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Next Steps -->
+                <p class="text-gray-600 mb-6">
+                    You will receive an email shortly with your admission details and onboarding instructions.  
+                    Get ready to start your professional journey!
+                </p>
+
+                <!-- Buttons -->
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <a href="index.html" class="px-6 py-3 bg-brand-primary text-white font-bold rounded-xl shadow-lg hover:bg-slate-700 transition transform hover:scale-[1.03]">
+                        Go to Dashboard
+                    </a>
+                    <button onclick="window.print()" class="px-6 py-3 bg-white border-2 border-brand-secondary text-brand-secondary font-bold rounded-xl shadow-lg hover:bg-brand-secondary hover:text-white transition transform hover:scale-[1.03]">
+                        Print Receipt
+                    </button>
                 </div>
             </div>
         </section>
@@ -270,8 +311,8 @@
     <button id="chat-toggle-btn" onclick="toggleChat()" class="fixed bottom-4 right-4 w-16 h-16 bg-brand-secondary rounded-full flex items-center justify-center text-white shadow-xl hover:bg-orange-600 transition duration-300 transform hover:scale-110">
         <span data-lucide="message-square" class="w-8 h-8"></span>
     </button>
-
-    <script src="assets/js/track-payment.js"></script>
+    
     <script src="assets/js/chat.js"></script>
+    <script src="assets/js/payment.js"></script>
 </body>
 </html>
