@@ -199,7 +199,7 @@ function renderTransactions(data) {
                 <td>${new Date(txn.CreatedAt).toLocaleDateString()}</td>
                 <td>₦${txn.amount_paid.toLocaleString()}</td>
                 <td>
-                    <a href="https://wa.me/${txn.phone}" target="_blank" class="text-green-600 hover:underline">
+                    <a href="https://wa.me/${txn.phone.replace(/^0/, "234")}" target="_blank" class="text-green-600 hover:underline">
                         ${txn.phone}
                     </a>
                 </td>
