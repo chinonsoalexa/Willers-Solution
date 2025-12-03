@@ -288,8 +288,13 @@ function showSkillDetails(skillKey) {
 
 function closeSkillDetails(event) {
     if (!event || event.target.id === 'skill-modal') {
-        document.getElementById('skill-modal').classList.add('hidden');
-        document.getElementById('skill-modal').classList.remove('flex');
+        const modal = document.getElementById('skill-modal');
+
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+
+        // Redirect
+        window.location.href = "#registration";
     }
 }
 
