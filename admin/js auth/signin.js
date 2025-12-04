@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault(); // Prevent the form from submitting traditionally
 
         // Reset previous error messages
-        resetErrors();
+        // resetErrors();
 
         // Collect login form data
         const loginEmail = document.getElementById('user').value.trim();
