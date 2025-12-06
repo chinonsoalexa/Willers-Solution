@@ -299,84 +299,78 @@
                     <!-- ========== Page Title End ========== -->
 
                     <div class="row">
-                         <div class="col-xl-6 offset-xl-3">
-                         <div class="card">
-                              <div class="card-header border-bottom d-flex justify-content-between align-items-center">
-                              <h4 class="card-title mb-0">Send Money</h4>
-                              <span class="badge bg-primary text-white fs-12">Secure Transfer</span>
-                              </div>
+                         <div class="col-xl-10 offset-xl-1">
+                              <div class="card">
+                                   <div class="card-header border-bottom d-flex justify-content-between align-items-center">
+                                        <h4 class="card-title mb-0">Alison Course Management</h4>
+                                        <span class="badge bg-success fs-12">Integration Active</span>
+                                   </div>
 
-                              <div class="card-body">
-                              <!-- Static receiver info -->
-                              <div class="mb-4">
-                                   <h6 class="fw-semibold mb-2">Recipient Details</h6>
-                                   <div class="bg-light p-3 rounded">
-                                   <p class="mb-1"><strong>Name:</strong> SAVE REFUGE FOUNDATION</p>
-                                   <p class="mb-1"><strong>Account Number:</strong> 1025140863</p>
-                                   <p class="mb-0"><strong>Bank:</strong> United Bank For Africa</p>
+                                   <div class="card-body">
+
+                                        <!-- 🔽 Course Selection -->
+                                        <div class="mb-4">
+                                             <label class="form-label fw-bold">Select Course</label>
+                                             <select class="form-select" id="courseSelector">
+                                             <option value="All">-- Select Course --</option>
+                                             <option>Customer Support</option>
+                                             <option>UI/UX</option>
+                                             <option>Front End Development</option>
+                                             <option>Cyber Security</option>
+                                             <option>IT Support</option>
+                                             <option>Virtual Assistance</option>
+                                             <option>Finance & Accounting</option>
+                                             <option>Sales</option>
+                                             <option>HR</option>
+                                             <option>Data Analytics</option>
+                                             <option>Project Management</option>
+                                             <option>Business Admin</option>
+                                             </select>
+                                        </div>
+
+                                        <!-- 📊 Overview -->
+                                        <div class="row text-center" id="courseStats" style="display:none;">
+                                             <div class="col-md-6">
+                                             <div class="p-3 bg-light rounded">
+                                                  <h5 class="mb-0 fw-semibold" id="totalStudents">0</h5>
+                                                  <small class="text-muted">Paid Students</small>
+                                             </div>
+                                             </div>
+                                             <div class="col-md-6">
+                                             <div class="p-3 bg-light rounded">
+                                                  <h5 class="mb-0 fw-semibold" id="totalRevenue">₦0.00</h5>
+                                                  <small class="text-muted">Total Revenue</small>
+                                             </div>
+                                             </div>
+                                        </div>
+
+                                        <!-- 📋 Registered Students Table -->
+                                        <div class="table-responsive mt-4">
+                                             <table class="table table-striped table-bordered">
+                                             <thead class="table-dark">
+                                                  <tr>
+                                                       <th>#</th>
+                                                       <th>Name</th>
+                                                       <th>Email</th>
+                                                       <th>Phone</th>
+                                                       <th>Amount</th>
+                                                  </tr>
+                                             </thead>
+                                             <tbody id="studentsTable">
+                                                  <tr><td colspan="5" class="text-center text-muted">Select a course to load data...</td></tr>
+                                             </tbody>
+                                             </table>
+                                        </div>
+
+                                        <!-- 📧 Email Broadcast -->
+                                        <div class="mt-4">
+                                             <label class="form-label fw-bold">Send Email To Registered Students</label>
+                                             <textarea class="form-control mb-2" id="emailMessage" rows="3" placeholder="Type your message..."></textarea>
+                                             <button class="btn btn-primary w-100" id="sendEmailBtn" disabled>Send Email</button>
+                                        </div>
+
                                    </div>
                               </div>
-
-                              <!-- Send money form -->
-                              <form id="sendMoneyForm">
-                              <div class="mb-3">
-                              <label for="amount" class="form-label">Amount (₦)</label>
-                              <input type="number" class="form-control" id="amount" placeholder="Enter amount to send" required>
-                              <small id="chargeDisplay" class="text-muted d-block mt-1">Transaction charge: ₦0.00</small>
-                              </div>
-
-                              <div class="mb-3">
-                              <label for="method" class="form-label">Payment Method</label>
-                              <select class="form-select" id="method" required>
-                                   <option value="">Select payment method</option>
-                                   <option value="bank">Bank Transfer</option>
-                              </select>
-                              </div>
-
-                              <div class="mb-3">
-                              <label for="note" class="form-label">Note (optional)</label>
-                              <textarea class="form-control" id="note" rows="2" placeholder="Add a short note..."></textarea>
-                              </div>
-
-                              <button type="submit" class="btn btn-primary w-100" id="sendBtn" disabled>Send Money</button>
-                              </form>
-
-                              <!-- ✅ Success Popup -->
-                              <div id="successPopup" style="
-                              display:none;
-                              position:fixed;
-                              top:0; left:0;
-                              width:100%; height:100%;
-                              background:rgba(0,0,0,0.6);
-                              align-items:center;
-                              justify-content:center;
-                              z-index:9999;">
-                              <div style="
-                              background:white;
-                              border-radius:15px;
-                              padding:30px;
-                              text-align:center;
-                              max-width:380px;
-                              box-shadow:0 10px 25px rgba(0,0,0,0.2);
-                              ">
-                              <img src="https://cdn-icons-png.flaticon.com/512/845/845646.png" 
-                                   alt="Success" style="width:70px;margin-bottom:15px;">
-                              <h3 style="color:#28a745;">Transaction Successful!</h3>
-                              <p>Your money has been sent successfully. Thank you for using our service.</p>
-                              <button onclick="closeSuccessPopup()" style="
-                                   background:#28a745;
-                                   color:white;
-                                   border:none;
-                                   border-radius:8px;
-                                   padding:10px 20px;
-                                   margin-top:10px;
-                                   cursor:pointer;
-                              ">Close</button>
-                              </div>
-                              </div>
-
-                              </div>
-                         </div>
                          </div>
                     </div>
 
@@ -411,7 +405,7 @@
      <script src="assets/js/app.js"></script>
 
      <!-- order.js code -->
-     <script src="js/withdraw.js"></script>
+     <script src="js/send-emails.js"></script>
 
 </body>
 
