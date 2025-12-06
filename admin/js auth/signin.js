@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         
 
-        fetch('https://willers-solutions-backend.onrender.com/sign-in', {
+        fetch('https://nysc-api.willerssolutions.com/sign-in', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //     // Perform the reset password action (e.g., send a request to your server)
     //     console.log('Reset Password Data:', { email: resetEmail });
 
-    //     fetch('https://willers-solutions-backend.onrender.com/forgotten-password-email', {
+    //     fetch('https://nysc-api.willerssolutions.com/forgotten-password-email', {
     //         method: 'POST',
     //         headers: {
     //             'Content-Type': 'application/json'

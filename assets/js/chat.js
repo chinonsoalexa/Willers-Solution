@@ -189,7 +189,7 @@ async function callGeminiAPI(userQuery, systemPrompt, retryCount = 0) {
     };
 
     try {
-        const response = await fetch("https://willers-solutions-backend.onrender.com/ai-chat", {
+        const response = await fetch("https://nysc-api.willerssolutions.com/ai-chat", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)

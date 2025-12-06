@@ -16,7 +16,7 @@ document.querySelector('#register-btn').addEventListener('click', async function
     button.classList.add('opacity-50', 'cursor-not-allowed');
 
     try {
-        const response = await fetch("https://willers-solutions-backend.onrender.com/buy-course", {
+        const response = await fetch("https://nysc-api.willerssolutions.com/buy-course", {
             method: 'POST',
             credentials: 'include',
             headers: {

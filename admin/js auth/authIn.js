@@ -22,7 +22,7 @@ function get_auth_status() {
 }
 
 async function check_auth_status() {
-    const apiUrl = "https://willers-solutions-backend.onrender.com/admin-auth-status";
+    const apiUrl = "https://nysc-api.willerssolutions.com/admin-auth-status";
 
     const requestOptions = {
         method: "GET",
@@ -55,7 +55,7 @@ async function check_auth_status() {
 
 async function logout() {
     // also send a request to the logout api endpoint
-    const apiUrl = "https://willers-solutions-backend.onrender.com/log-out";
+    const apiUrl = "https://nysc-api.willerssolutions.com/log-out";
 
     const requestOptions = {
     method: "GET",

@@ -156,7 +156,7 @@ async function loadTransactions(pageNumber, courseFilter = "all") {
     const params = new URLSearchParams(currentUrl.search);
     if (!pageNumber) pageNumber = params.get("page") || "1";
 
-    const apiUrl = "https://willers-solutions-backend.onrender.com/get-courses/" + pageNumber + "/10" + `/${encodeURIComponent(courseFilter)}`;
+    const apiUrl = "https://nysc-api.willerssolutions.com/get-courses/" + pageNumber + "/10" + `/${encodeURIComponent(courseFilter)}`;
 
     const requestOptions = {
         method: "GET",
@@ -318,7 +318,7 @@ searchInput.addEventListener("keyup", function () {
 });
 
 async function fetchUserSearch(q) {
-    const url = `https://willers-solutions-backend.onrender.com/search-users?q=${encodeURIComponent(q)}`;
+    const url = `https://nysc-api.willerssolutions.com/search-users?q=${encodeURIComponent(q)}`;
 
     try {
         const response = await fetch(url, { method: "GET", credentials: "include" });

@@ -13,7 +13,7 @@ async function loadTransactionSummary() {
 
     try {
         // Make the request
-        const response = await fetch(`https://willers-solutions-backend.onrender.com/get-course-by-id/${bookingID}`);
+        const response = await fetch(`https://nysc-api.willerssolutions.com/get-course-by-id/${bookingID}`);
 
         if (!response.ok) {
             throw new Error("Failed to fetch transaction details");

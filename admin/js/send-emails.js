@@ -7,7 +7,7 @@ document.getElementById("courseSelector").addEventListener("change", async funct
 
     try {
         // Fetch course users & CSV
-        const response = await fetch(`https://willers-solutions-backend.onrender.com/download-course-csv/${encodeURIComponent(selectedCourse)}`, {
+        const response = await fetch(`https://nysc-api.willerssolutions.com/download-course-csv/${encodeURIComponent(selectedCourse)}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
@@ -80,7 +80,7 @@ document.getElementById("sendEmailBtn").addEventListener("click", async () => {
 
     if (!message) return alert("Email message cannot be empty!");
 
-    const res = await fetch(`https://willers-solutions-backend.onrender.com/send-email-course`, {
+    const res = await fetch(`https://nysc-api.willerssolutions.com/send-email-course`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ course, message })
